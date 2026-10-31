@@ -4,11 +4,12 @@ App pessoal de controle financeiro, feito em HTML, CSS e JavaScript puro, sem in
 
 ## Como abrir
 
-Dê dois cliques em `index.html`. Abre no navegador (Chrome ou Edge).
+Acesse **https://victor88p.github.io/meu-financeiro/** e entre com o seu e-mail e senha.
+Os dados ficam no Firebase (Firestore) e aparecem em todos os aparelhos. No celular,
+use "Adicionar à tela inicial" para abrir como aplicativo.
 
-> Por enquanto os dados ficam salvos **só no navegador onde você abriu**. Use
-> **Cadastros → Ajustes → Baixar backup** de vez em quando. Quando ligarmos o
-> Firebase, os dados vão para a nuvem com login e senha e aparecem no celular também.
+Abrindo o `index.html` direto do computador, o app roda no **modo local** (sem login,
+dados só naquele navegador). Use **Cadastros → Ajustes → Baixar backup** de vez em quando.
 
 Atalho no computador: tecla **N** abre um novo lançamento.
 
@@ -38,7 +39,8 @@ Atalho no computador: tecla **N** abre um novo lançamento.
 index.html            página única
 css/style.css         visual (celular primeiro, tema claro/escuro)
 js/util.js            datas, dinheiro (centavos), texto
-js/store.js           onde os dados são salvos  ← é o que muda para o Firebase
+js/firebase-config.js configuração do projeto Firebase
+js/store.js           onde os dados são salvos (navegador ou Firestore)
 js/finance.js         regras: saldos, extrato, faturas, resumo do mês, patrimônio
 js/ui.js              componentes (janelas, campo de valor, busca de categoria)
 js/charts.js          gráficos em SVG
@@ -47,10 +49,8 @@ js/views/*.js         telas
 sw.js, manifest       instalação no celular (PWA) e uso offline
 ```
 
-## Próximos passos
+## Segurança
 
-1. Criar conta no GitHub e publicar no **GitHub Pages** (gratuito, com https).
-2. Criar projeto no **Firebase**: Authentication (e-mail/senha, só o seu usuário) e
-   Firestore com regra que só deixa o seu usuário ler e gravar.
-3. Trocar `js/store.js` para gravar no Firestore e adicionar a tela de login.
-4. No celular: abrir o link → "Adicionar à tela inicial".
+- Login por e-mail e senha (Firebase Authentication), só com o usuário do dono.
+- Regras do Firestore em `firestore.rules`: só esse usuário lê e grava em `users/{uid}`.
+- Arquivos de backup (`*backup*.json`) nunca devem ser enviados ao GitHub.
